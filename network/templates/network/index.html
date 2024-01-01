@@ -35,7 +35,7 @@
                                         <div class="post-user">
                                             <div>
                                                 <a href="{% url 'profile' post.creater.username %}">
-                                                    <span><strong>{{post.creater.first_name}} {{post.creater.last_name}}</strong></span>
+                                                    <span><strong>{{post.creater.first_name}} {{post.creater.last_name}} ({{post.creater.spec}})</strong></span>
                                                 </a>
                                                 <a href="{% url 'profile' post.creater.username %}">
                                                     <span class="grey">&nbsp;@{{post.creater.username}}</span>

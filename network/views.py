@@ -62,6 +62,10 @@ def register(request):
         email = request.POST["email"]
         fname = request.POST["firstname"]
         lname = request.POST["lastname"]
+
+        bio = request.POST["bio"]
+        spec = request.POST["spec"]
+
         profile = request.FILES.get("profile")
         print(f"--------------------------Profile: {profile}----------------------------")
         cover = request.FILES.get('cover')
@@ -80,6 +84,10 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.first_name = fname
             user.last_name = lname
+            user.bio = bio
+            user.spec = spec
+
+
             if profile is not None:
                 user.profile_pic = profile
             else:

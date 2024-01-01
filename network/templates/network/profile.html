@@ -17,11 +17,15 @@
                 {% endif %}
             </div>
             <div class="details-data">
+                {% if username.spec is not None %}
+                <h5>{{username.first_name}} {{username.last_name}} ({{username.spec}})</h5>
+                {% else %}
                 <h5>{{username.first_name}} {{username.last_name}}</h5>
+                {% endif %}
                 <div class="grey">@{{username.username}}</div>
                 <div class="bio">
                     {% if username.bio is not None %}
-                        {{username.bio}}
+                       О себе: {{username.bio}}
                     {% endif %}
                 </div>
                 <div class="grey" style="padding: 8px 0px;">

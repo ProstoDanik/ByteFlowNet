@@ -7,6 +7,7 @@ class User(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pic/')
     bio = models.TextField(max_length=160, blank=True, null=True)
     cover = models.ImageField(upload_to='covers/', blank=True)
+    spec = models.TextField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.username
