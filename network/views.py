@@ -22,7 +22,13 @@ def index(request):
     suggestions = []
     if request.user.is_authenticated:
         followings = Follower.objects.filter(followers=request.user).values_list('user', flat=True)
+
+
         suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
+
+
+
+
     return render(request, "network/index.html", {
         "posts": posts,
         "suggestions": suggestions,
@@ -377,3 +383,9 @@ def delete_post(request, post_id):
             return HttpResponse("Method must be 'PUT'")
     else:
         return HttpResponseRedirect(reverse('login'))
+
+
+
+
+def materials(request):
+    return render(request, 'network/materials.html')
