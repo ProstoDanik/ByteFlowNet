@@ -23,10 +23,13 @@ def index(request):
     if request.user.is_authenticated:
         followings = Follower.objects.filter(followers=request.user).values_list('user', flat=True)
 
+        # search_query = request.GET.get('search', '')
+        # if search_query == None or search_query == '#':
+        #     suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
+        # else:
+        #     suggestions = User.objects.filter(username__iregex=search_query)
 
         suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
-
-
 
 
     return render(request, "network/index.html", {

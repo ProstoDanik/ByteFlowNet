@@ -31,7 +31,7 @@
                     <div class="form-area">
                         <form action="{% url 'createpost' %}" method="POST" class="newpost" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <textarea name="text" autofocus placeholder="Пиши..." rows="5" id="post-text"></textarea>
+                            <textarea name="text" autofocus placeholder="Не забывайте про хештеги: #олмат #python #олпрога и тд" rows="5" id="post-text"></textarea>
                             <input type="hidden" id="img-change" value="false"></input>
                             <div id='img-div'>
                                 <button id="del-img" type='button'>
@@ -259,9 +259,11 @@
 <!--                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>-->
 <!--                                </svg>-->
                             </div>
-                            <input type="text" name="search" id="search-box" placeholder="Искать в ByteFlowNet">
+                            <input type="text" name="search" id="search-box"  placeholder="Искать в ByteFlowNet">
+
                         </div>
                     </form>
+
                 </nav>
                 <div class='right-div-content'>
                     <div class="space" style="background-color: white;"></div>
@@ -285,12 +287,12 @@
                                                     {{suggestion.first_name}} {{suggestion.last_name}}
                                                 </strong>
                                             </div>
-                                            <div class="grey">@{{suggestion.username}}</div>
+                                            <div class="grey" style="">@{{suggestion.username}}</div>
                                         </a>
                                     </div>
-                                    <div>
-                                        <button class="btn btn-outline-success" type="button" onclick="follow_user(this,'{{suggestion.username}}','suggestion')">Follow</button>
-                                    </div>
+<!--                                    <div>-->
+<!--                                        <button class="btn btn-outline-success" type="button" onclick="follow_user(this,'{{suggestion.username}}','suggestion')">Подписаться</button>-->
+<!--                                    </div>-->
                                 </div>
                             {% empty %}
                                     <div style="text-align: center; border-bottom: .5px solid #e6ecf0; padding: 10px 15px;">

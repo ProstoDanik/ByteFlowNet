@@ -70,6 +70,14 @@
                                             </div>
                                         </div>
                                         {% if post.content_text is not None %}
+<!--                                            {% for word in post.content_text.split %}-->
+<!--                                                {% if word.0 == '#' %}-->
+<!--                                          <span class="post-content" style="color: blue;">{{ word }}</span>-->
+<!--  {% else %}-->
+<!--    <span class="post-content" style="color: black;">{{ word }}</span>-->
+<!--  {% endif %}-->
+<!--{% endfor %}-->
+
                                             <div class="post-content">
                                                 {{post.content_text | linebreaksbr}}
                                             </div>
