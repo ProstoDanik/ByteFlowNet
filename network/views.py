@@ -134,7 +134,16 @@ def profile(request, username):
     follower = False
     if request.user.is_authenticated:
         followings = Follower.objects.filter(followers=request.user).values_list('user', flat=True)
-        suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
+
+        search_query = request.GET.get('search', '')
+        if search_query:
+            suggestions = User.objects.filter(
+                Q(username__icontains=search_query) | Q(first_name__icontains=search_query) | Q(
+                    spec__icontains=search_query))
+        else:
+            suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[
+                          :6]
+        # suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
 
         if request.user in Follower.objects.get(user=user).followers.all():
             follower = True
@@ -162,7 +171,16 @@ def following(request):
             page_number = 1
         posts = paginator.get_page(page_number)
         followings = Follower.objects.filter(followers=request.user).values_list('user', flat=True)
-        suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
+
+        search_query = request.GET.get('search', '')
+        if search_query:
+            suggestions = User.objects.filter(
+                Q(username__icontains=search_query) | Q(first_name__icontains=search_query) | Q(
+                    spec__icontains=search_query))
+        else:
+            suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[
+                          :6]
+        # suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
         return render(request, "network/index.html", {
             "posts": posts,
             "suggestions": suggestions,
@@ -182,7 +200,16 @@ def saved(request):
         posts = paginator.get_page(page_number)
 
         followings = Follower.objects.filter(followers=request.user).values_list('user', flat=True)
-        suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
+
+        search_query = request.GET.get('search', '')
+        if search_query:
+            suggestions = User.objects.filter(
+                Q(username__icontains=search_query) | Q(first_name__icontains=search_query) | Q(
+                    spec__icontains=search_query))
+        else:
+            suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[
+                          :6]
+        # suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
         return render(request, "network/index.html", {
             "posts": posts,
             "suggestions": suggestions,
