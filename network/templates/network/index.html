@@ -217,6 +217,33 @@
         </div>
         
     </div>
-    
+<script>
+    // Это событие будет выполнено, когда весь HTML документ будет загружен
+document.addEventListener("DOMContentLoaded", function(event) {
+  // Получаем все элементы с классом "post-content" на странице
+  var elements = document.querySelectorAll(".post-content");
+  // Проходим циклом по каждому элементу
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    // Получаем текст из элемента
+    var text = element.textContent;
+    // Разбиваем текст на слова
+    var words = text.split(" ");
+    // Проходим циклом по каждому слову
+    for (var j = 0; j < words.length; j++) {
+      // Проверяем, начинается ли слово с символа #
+      if (words[j].startsWith("#")) {
+        // Если да, меняем цвет текста на синий
+        words[j] = "<span style='color: blue'>" + words[j] + "</span>";
+      }
+    }
+    // Объединяем отформатированные слова обратно в текст
+    var formattedText = words.join(" ");
+    // Заменяем старый текст на отформатированный
+    element.innerHTML = formattedText;
+  }
+});
+
+</script>
 
 {% endblock %}

@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 import json
+from django.db.models import Q
 
 from .models import *
 
@@ -24,12 +25,17 @@ def index(request):
         followings = Follower.objects.filter(followers=request.user).values_list('user', flat=True)
 
         # search_query = request.GET.get('search', '')
-        # if search_query == None or search_query == '#':
+        # if search_query == None:
         #     suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
         # else:
         #     suggestions = User.objects.filter(username__iregex=search_query)
+        search_query = request.GET.get('search', '')
+        if search_query:
+            suggestions = User.objects.filter(Q(username__icontains=search_query)| Q(first_name__icontains=search_query) | Q(spec__icontains=search_query))
+        else:
+            suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
 
-        suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
+        # suggestions = User.objects.exclude(pk__in=followings).exclude(username=request.user.username).order_by("?")[:6]
 
 
     return render(request, "network/index.html", {
